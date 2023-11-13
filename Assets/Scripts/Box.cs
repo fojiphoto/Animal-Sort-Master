@@ -28,6 +28,10 @@ public class Box : MonoBehaviour
 
     public GameObject vfxOnDeath;
 
+   
+
+    public movemanager movecount;
+  
     public bool moveAble = true;
 
     private int ID;
@@ -68,22 +72,25 @@ public class Box : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision != null && collision.gameObject.tag == gameObject.tag)
+        
         {
-            if (!collision.gameObject.GetComponent<Deliver>().isOnStandPos) 
+            if (collision != null && collision.gameObject.tag == gameObject.tag)
+            {
+                if (!collision.gameObject.GetComponent<Deliver>().isOnStandPos)
+                {
+                    ReSetPos();
+                    return;
+                    
+                }
+                Success();
+                collision.gameObject.GetComponent<Deliver>().PlusBox();
+            }
+            else
             {
                 ReSetPos();
-                return;
-            } 
-            Success();
-            collision.gameObject.GetComponent<Deliver>().PlusBox();
-        }
-        else
-        {
-            ReSetPos();
+            }
         }
     }
-
     public void Success()
     {
         GameObject vfx = Instantiate(vfxSuccess, transform.position, Quaternion.identity);
@@ -99,6 +106,7 @@ public class Box : MonoBehaviour
         transform.position = startPos;
         startMovement = false;
         drawControl.ResetLine();
+        movecount.move--;
     }
 
     private void Update()
@@ -121,6 +129,7 @@ public class Box : MonoBehaviour
                 startMovement = false;
             }
         }
+        
     }
 
     private void CheckPos()

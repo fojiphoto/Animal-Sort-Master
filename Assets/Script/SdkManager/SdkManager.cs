@@ -21,7 +21,7 @@ public class SdkManager : MonoBehaviour
     private void Awake()
     {
         Debug.unityLogger.filterLogType = LogType.Warning;
-        Debug.LogWarning("Support Email:" + config.emailSupport);
+        //Debug.LogWarning("Support Email:" + config.emailSupport);
     }
 
     private void Update()

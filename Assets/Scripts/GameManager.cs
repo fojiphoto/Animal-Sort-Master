@@ -15,17 +15,39 @@ public class GameManager : MonoBehaviour
 
     public GameObject vfxLevelUp;
 
+    public GameObject WinPanel;
+    int n;
+
+    private void Start()
+    {
+      
+    }
+
     private void Awake()
     {
+        n = PlayerPrefs.GetInt("level");
+        currentIndex = n;
+        Debug.Log("curent value"+currentIndex);
+
         if (Instance == null)
         {
             Instance = this;
         }
+        for (int i = 0; i < 20; i++)
+        {
+            levels[i].gameObject.SetActive(false);
+            
+        }
 
-        currentIndex = startIndex;
+      //  currentIndex = startIndex;
+      if(currentIndex!=0)
 
-        levels[currentIndex].gameObject.SetActive(true);
+        levels[currentIndex-1].gameObject.SetActive(true);
+      else
+            levels[currentIndex].gameObject.SetActive(true);
     }
+
+    
 
     public int GetCurrentIndex()
     {
@@ -43,7 +65,9 @@ public class GameManager : MonoBehaviour
             Destroy(vfx, 2f);
 
             StartCoroutine(LevelUp());
+            showWinPanel();
         }
+        PlayerPrefs.SetInt("level", currentIndex);
     }
 
     public void ResetGame()
@@ -71,4 +95,17 @@ public class GameManager : MonoBehaviour
     {
         //levels[currentIndex].AddComponents();
     }
+    public void showWinPanel()
+    {
+        WinPanel.SetActive(true);
+    }
+    public void LoadNextLevelFromWinPanel()
+    {
+        // Hide the win panel
+        WinPanel.SetActive(false);
+
+        // Call the LevelUp coroutine to move to the next level
+        StartCoroutine(LevelUp());
+    }
+    
 }

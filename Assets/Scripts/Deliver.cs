@@ -30,6 +30,7 @@ public class Deliver : MonoBehaviour
 
     public bool canGoToStandPos = false;
 
+
     private void Awake()
     {
         foreach(GameObject box in boxes)
@@ -56,6 +57,8 @@ public class Deliver : MonoBehaviour
             //transform.localEulerAngles = new Vector3(0f, 0f, -90f);
         }
     }
+
+
 
     private void FixedUpdate()
     {

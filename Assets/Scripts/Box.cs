@@ -28,7 +28,7 @@ public class Box : MonoBehaviour
 
     public GameObject vfxOnDeath;
 
-   
+    public GameManager gameManager;
 
     public movemanager movecount;
   
@@ -97,6 +97,8 @@ public class Box : MonoBehaviour
         Destroy(vfx, 1f);
         startMovement = false;
         gameObject.SetActive(false);
+
+        //
     }
 
     public void ReSetPos()

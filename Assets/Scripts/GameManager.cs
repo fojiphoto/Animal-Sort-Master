@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public List<Level> levels;
 
-    private int startIndex = 0;
+    private int startIndex =0;
 
     private int currentIndex;
 
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         n = PlayerPrefs.GetInt("level");
-        currentIndex = n;
+        currentIndex = n-1;
         Debug.Log("curent value"+currentIndex);
 
         if (Instance == null)
@@ -40,11 +40,7 @@ public class GameManager : MonoBehaviour
         }
 
       //  currentIndex = startIndex;
-      if(currentIndex!=0)
-
-        levels[currentIndex-1].gameObject.SetActive(true);
-      else
-            levels[currentIndex].gameObject.SetActive(true);
+     levels[currentIndex ].gameObject.SetActive(true);
     }
 
     
@@ -60,12 +56,13 @@ public class GameManager : MonoBehaviour
         {
             
             currentIndex += 1;
-
+            PlayerPrefs.SetInt("level", currentIndex);
             GameObject vfx = Instantiate(vfxLevelUp, transform.position, Quaternion.identity);
             Destroy(vfx, 2f);
 
             StartCoroutine(LevelUp());
-            showWinPanel();
+            Invoke(nameof(showWinPanel), 2f);
+           //showWinPanel();
         }
         PlayerPrefs.SetInt("level", currentIndex);
     }
@@ -79,16 +76,18 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        levels[currentIndex-1].gameObject.SetActive(false);
-
-        if (currentIndex >= levels.Count)
+        if (currentIndex < levels.Count)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            levels[currentIndex - 1].gameObject.SetActive(false);
+            levels[currentIndex].gameObject.SetActive(true);
+            
 
-            currentIndex = 0;
         }
-
-        levels[currentIndex].gameObject.SetActive(true);
+        else
+        {
+            // All levels completed, you can handle this case accordingly
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public void ReSetCurrentLevel()
@@ -106,6 +105,7 @@ public class GameManager : MonoBehaviour
 
         // Call the LevelUp coroutine to move to the next level
         StartCoroutine(LevelUp());
+        
     }
     
 }

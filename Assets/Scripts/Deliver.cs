@@ -86,25 +86,29 @@ public class Deliver : MonoBehaviour
             {
                 canMove = false;
 
-                GameManager.Instance.levels[GameManager.Instance.GetCurrentIndex()].gameObjects.Remove(gameObject);
+                GameManager.Instance.levels[GameManager.Instance.GetCurrentIndex()].gameObjects.RemoveAt(0);
+
                 GameObject explosion = Instantiate(vfxOnSuccess, transform.position, transform.rotation);
                 Destroy(explosion, 1f);
-                
 
-                if (GameManager.Instance.levels[GameManager.Instance.GetCurrentIndex()].gameObjects.Count != 0) 
-                {
-                    GameManager.Instance.levels[GameManager.Instance.GetCurrentIndex()].SetDeliverToStandPos();
-                }
-                else
-                {
-                    GameManager.Instance.CheckLevelUp();
-                }
-                
-                gameObject.SetActive(false);
+                Invoke(nameof(extra),0.3f);
             }
         }
     }
 
+    void extra() 
+    {
+        if (GameManager.Instance.levels[GameManager.Instance.GetCurrentIndex()].gameObjects.Count != 0)
+        {
+            GameManager.Instance.levels[GameManager.Instance.GetCurrentIndex()].SetDeliverToStandPos();
+        }
+        else
+        {
+            GameManager.Instance.CheckLevelUp();
+        }
+
+        gameObject.SetActive(false);
+    }
 
     private void CheckPos()
     {

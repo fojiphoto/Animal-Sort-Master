@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject vfxLevelUp;
 
-    public GameObject WinPanel;
+    public GameObject WinPanel,level,level1, level2, level3, level4, level5, level6, level7, level8, level9, level10, level11, level12, level13, level14, level15, level16, level17, level18, level19;
     int n;
 
     private void Start()
@@ -97,6 +97,30 @@ public class GameManager : MonoBehaviour
     public void showWinPanel()
     {
         WinPanel.SetActive(true);
+        level.SetActive(false);
+        level1.SetActive(false);
+        level2.SetActive(false);
+        level3.SetActive(false);
+        level4.SetActive(false);
+        level5.SetActive(false);
+        level6.SetActive(false);
+        level7.SetActive(false);
+        level8.SetActive(false);
+        level9.SetActive(false);
+        level10.SetActive(false);
+        level11.SetActive(false);
+        level2.SetActive(false);
+        level3.SetActive(false);
+        level4.SetActive(false);
+        level5.SetActive(false);
+        level6.SetActive(false);
+        level7.SetActive(false);
+        level8.SetActive(false);
+
+        level9.SetActive(false);
+        
+
+        
     }
     public void LoadNextLevelFromWinPanel()
     {

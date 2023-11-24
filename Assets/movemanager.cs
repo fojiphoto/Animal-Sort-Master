@@ -18,6 +18,7 @@ public class movemanager : MonoBehaviour
         if(move == 0)
         {
             canvas.SetActive(true);
+            AdsManager.instance?.ShowInterstitialWithoutConditions();
         }
     }
 }

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-      
+        Debug.Log(PlayerPrefs.GetInt("level"));
     }
 
     private void Awake()
@@ -59,16 +59,19 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("level", currentIndex);
             GameObject vfx = Instantiate(vfxLevelUp, transform.position, Quaternion.identity);
             Destroy(vfx, 2f);
-
+            
+            PlayerPrefs.Save();
             StartCoroutine(LevelUp());
             Invoke(nameof(showWinPanel), 2f);
-           //showWinPanel();
+            //showWinPanel();
+            
         }
         PlayerPrefs.SetInt("level", currentIndex);
     }
 
     public void ResetGame()
     {
+        PlayerPrefs.SetInt("level", currentIndex+1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -81,6 +84,7 @@ public class GameManager : MonoBehaviour
             levels[currentIndex - 1].gameObject.SetActive(false);
             levels[currentIndex].gameObject.SetActive(true);
             
+
 
         }
         else
@@ -97,6 +101,7 @@ public class GameManager : MonoBehaviour
     public void showWinPanel()
     {
         WinPanel.SetActive(true);
+        AdsManager.instance?.ShowInterstitialWithoutConditions();
         level.SetActive(false);
         level1.SetActive(false);
         level2.SetActive(false);
@@ -126,6 +131,27 @@ public class GameManager : MonoBehaviour
     {
         // Hide the win panel
         WinPanel.SetActive(false);
+        level.SetActive(true);
+        level1.SetActive(true);
+        level2.SetActive(true);
+        level3.SetActive(true);
+        level4.SetActive(true);
+        level5.SetActive(true);
+        level6.SetActive(true);
+        level7.SetActive(true);
+        level8.SetActive(true);
+        level9.SetActive(true);
+        level10.SetActive(true);
+        level11.SetActive(true);
+        level2.SetActive(true);
+        level3.SetActive(true);
+        level4.SetActive(true);
+        level5.SetActive(true);
+        level6.SetActive(true);
+        level7.SetActive(true);
+        level8.SetActive(true);
+
+        level9.SetActive(true);
 
         // Call the LevelUp coroutine to move to the next level
         StartCoroutine(LevelUp());

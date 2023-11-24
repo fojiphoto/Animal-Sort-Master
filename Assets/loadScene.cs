@@ -14,6 +14,6 @@ public class loadScene : MonoBehaviour
     public void GoToHomeScene()
     {
         // Load the scene with index 0 (assuming 0 is your home scene)
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }

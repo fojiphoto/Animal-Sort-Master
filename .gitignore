@@ -108,3 +108,5 @@ remote_config_data
 .idea/mongoSettings.xml
 workspace.xml
 .idea
+Assets/Firebase/Editor/FirebaseAnalytics_version-11.1.0_manifest.txt
+Assets/Firebase/Plugins/x86_64/FirebaseCppApp-11_1_0.bundle
